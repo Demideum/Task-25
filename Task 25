@@ -1,0 +1,55 @@
+namespace IJunior_Task25
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int numberOfArrayItems = 30;
+            int minRandomNumber = 0;
+            int maxRandomNumber = 5;
+            int maxRecurringNumber = 1;
+            int repetitionate = 1;
+            int desiredNumber = 0;
+
+            int[] array = new int[numberOfArrayItems];
+            Random random = new Random();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = random.Next(minRandomNumber, maxRandomNumber); 
+
+                if (i == array.Length - 1)
+                {
+                    for (int j = 1; j < array.Length - 1; j++)
+                    {
+                        if (array[j] == array[j - 1])
+                        {
+                            repetitionate++;
+                        }
+                        else
+                        {
+                            if (maxRecurringNumber < repetitionate)
+                            {
+                                maxRecurringNumber = repetitionate;
+                                desiredNumber = array[j - 1];
+                                repetitionate = 1;
+                            }
+                            else
+                            {
+                                repetitionate = 1;
+                            }    
+                        }
+                    }                    
+                }
+            }
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write($"{array[i]} ");
+            }
+            Console.WriteLine();
+            Console.WriteLine($"Число, которое само больше раз повторяется подряд: {desiredNumber} ");
+            Console.WriteLine($"Число повторений: {maxRecurringNumber}");            
+        }
+    }
+}
